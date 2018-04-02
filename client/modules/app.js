@@ -1,0 +1,1 @@
+angular.module('app', ['ui.router', 'restangular', 'ngStorage', 'ui.bootstrap', 'ngAnimate', 'ngMessages','ngMaterial']);
