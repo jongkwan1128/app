@@ -13,19 +13,27 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card bg-light" style="margin-top: 30px; height: 500px;">
+            <div class="card bg-light" style="margin-top: 30px; height: 500px; overflow-y: scroll;">
                 <div class="card-header">
                     Item
                 </div>
                 <div class="card-body">
                     <form id="signInForm">
+                        <div class="form-group text-left">
+                            <label for="ctId">ID</label>
+                            <input type="text" class="form-control" id="ctId" ng-model="category.id" readonly>
+                        </div>
+                        <div class="form-group text-left">
+                            <label for="ctCreatedAt">Create At</label>
+                            <input type="text" class="form-control" id="ctCreatedAt" ng-model="category.createdAt" readonly>
+                        </div>
                         <div class="form-group text-left" style="padding-top: 10px;">
                             <label for="ctName">Name</label>
                             <input type="text" class="form-control" id="ctName" placeholder="Name" ng-model="category.name">
                         </div>
                         <div class="form-group text-left">
                             <label for="ctDescription">Description</label>
-                            <input type="text" class="form-control" id="ctDescription" placeholder="Description" ng-model="category.password">
+                            <textarea class="form-control" id="ctDescription" rows="2" ng-model="category.password"></textarea>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-outline-dark" ng-click="createCategory(category)">Create!!</button>
