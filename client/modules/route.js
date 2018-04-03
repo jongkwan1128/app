@@ -3,7 +3,8 @@ angular.module('app').constant('routeName', {
     MAIN: 'main',
     LOGIN: 'login',
     USER: 'user',
-    CATEGORY: 'category'
+    CATEGORY: 'category',
+    JOURNALIZING: 'journalizing'
 });
 
 angular.module('app').config(function ($stateProvider, $urlRouterProvider, routeName) {
@@ -76,6 +77,25 @@ angular.module('app').config(function ($stateProvider, $urlRouterProvider, route
             }
         },
         controller: 'categoryCtrl'
+    });
+
+    $stateProvider.state({
+        name: routeName.JOURNALIZING,
+        url: 'journalizing',
+        parent: routeName.MAIN,
+        templateUrl: 'modules/journalizing/journalizing.html',
+        resolve: {
+            categoryList: function ($http, $q) {
+                let defer = $q.defer();
+                $http.get('/category/list').then(function (d) {
+                    defer.resolve(d.data.categoryList);
+                }, function (e) {
+                    defer.reject(e);
+                });
+                return defer.promise;
+            }
+        },
+        controller: 'journalizingCtrl'
     });
     //
     // $stateProvider
