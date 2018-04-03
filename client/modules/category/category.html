@@ -1,46 +1,74 @@
-<div class="container text-center">
+<div class="container">
     <div class="row">
-        <div class="col-md-6">
-            <div class="card bg-light" style="margin-top: 30px; height: 500px; overflow-y: scroll;">
-                <div class="card-header">
-                    List
-                </div>
-
-                <ul class="list-group" ng-repeat="item in categoryList track by $index">
-                    <li class="list-group-item" >{{item.name}}</li>
-                </ul>
+        <div class="card text-white bg-dark" style="width: 100%; margin-top: 30px;">
+            <div class="card-header">Header</div>
+            <div class="card-body">
+                <form>
+                    <div class="form-row">
+                        <div class="col col-md-4">
+                            <input type="text" class="form-control" placeholder="Name" ng-model="category.name">
+                        </div>
+                        <div class="col col-md-7">
+                            <input type="text" class="form-control" placeholder="Description" ng-model="category.description">
+                        </div>
+                        <div class="col col-md-1">
+                            <button type="button" class="form-control btn btn-outline-light" ng-click="addCategory()">+</button>
+                        </div>
+                    </div>
+                </form>
 
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card bg-light" style="margin-top: 30px; height: 500px; overflow-y: scroll;">
-                <div class="card-header">
-                    Item
-                </div>
-                <div class="card-body">
-                    <form id="signInForm">
-                        <div class="form-group text-left">
-                            <label for="ctId">ID</label>
-                            <input type="text" class="form-control" id="ctId" ng-model="category.id" readonly>
+    </div>
+
+    <hr style="width: 100%;">
+
+    <div class="row">
+        <div class="card bg-light" style="width: 100%;">
+            <div class="card-header">Header</div>
+            <div class="card-body">
+                <h5 class="card-title">Light card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <ul class="list-group list-group-flush" ng-repeat="item in categoryList track by $index">
+                <li class="list-group-item">
+                    <div class="row" ng-if="item.editable == undefined || item.editable == false">
+                        <div class="col col-md-2">
+                            {{item.name}}
                         </div>
-                        <div class="form-group text-left">
-                            <label for="ctCreatedAt">Create At</label>
-                            <input type="text" class="form-control" id="ctCreatedAt" ng-model="category.createdAt" readonly>
+                        <div class="col col-md-5">
+                            {{item.description}}
                         </div>
-                        <div class="form-group text-left" style="padding-top: 10px;">
-                            <label for="ctName">Name</label>
-                            <input type="text" class="form-control" id="ctName" placeholder="Name" ng-model="category.name">
+                        <div class="col col-md-3">
+                            {{item.createdAt | date : 'yyyy-MM-dd HH:mm:ss'}}
                         </div>
-                        <div class="form-group text-left">
-                            <label for="ctDescription">Description</label>
-                            <textarea class="form-control" id="ctDescription" rows="2" ng-model="category.password"></textarea>
+                        <div class="col col-md-2 text-center">
+                            <button class="btn btn-outline-success btn-sm" ng-click="editCategory($index)">Edit</button>
+                            <button class="btn btn-outline-danger btn-sm" ng-click="removeCategory(item)">Remove</button>
                         </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-outline-dark" ng-click="createCategory(category)">Create!!</button>
+                    </div>
+
+                    <form ng-if="item.editable == true">
+                        <div class="form-row">
+                            <div class="col col-md-2">
+                                <input type="text" class="form-control" placeholder="Name" ng-model="item.name">
+                            </div>
+                            <div class="col col-md-5">
+                                <input type="text" class="form-control" placeholder="Description" ng-model="item.description">
+                            </div>
+                            <div class="col col-md-3">
+                                <!--{{item.createdAt | date : 'yyyy-MM-dd HH:mm:ss'}}-->
+                                <input type="text" class="form-control" placeholder="Description" ng-model="item.createdAt | date: 'yyyy-MM-dd HH:mm:ss'" disabled>
+                                <!--<input type="datetime-local" class="form-control" placeholder="Description" ng-model="item.createdAt" disabled>-->
+                            </div>
+                            <div class="col col-md-2 text-center">
+                                <button type="button" class="btn btn-outline-info btn-sm" ng-click="updateCategory(item)">Update</button>
+                                <button type="button" class="btn btn-outline-info btn-sm" ng-click="cancelEditCategory($index)">Cancel</button>
+                            </div>
                         </div>
                     </form>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

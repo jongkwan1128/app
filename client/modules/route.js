@@ -38,7 +38,7 @@ angular.module('app').config(function ($stateProvider, $urlRouterProvider, route
         url: '/',
         parent: routeName.BASE,
         templateUrl: 'modules/main/main.html',
-        resovle: {
+        resolve: {
             routeName: function (routeName) {
                 return routeName;
             }
@@ -51,7 +51,7 @@ angular.module('app').config(function ($stateProvider, $urlRouterProvider, route
         url: 'user',
         parent: routeName.MAIN,
         templateUrl: 'modules/user/user.html',
-        resovle: {
+        resolve: {
             routeName: function (routeName) {
                 return routeName;
             }
@@ -64,9 +64,15 @@ angular.module('app').config(function ($stateProvider, $urlRouterProvider, route
         url: 'category',
         parent: routeName.MAIN,
         templateUrl: 'modules/category/category.html',
-        resovle: {
-            routeName: function (routeName) {
-                return routeName;
+        resolve: {
+            categoryList: function ($http, $q) {
+                let defer = $q.defer();
+                $http.get('/category/list').then(function (d) {
+                    defer.resolve(d.data.categoryList);
+                }, function (e) {
+                    defer.reject(e);
+                });
+                return defer.promise;
             }
         },
         controller: 'categoryCtrl'
