@@ -93,6 +93,15 @@ angular.module('app').config(function ($stateProvider, $urlRouterProvider, route
                     defer.reject(e);
                 });
                 return defer.promise;
+            },
+            journalizingList: function ($http, $q) {
+                let defer = $q.defer();
+                $http.get('/journalizing/list').then(function (d) {
+                    defer.resolve(d.data.journalizingList);
+                }, function (e) {
+                    defer.reject(e);
+                });
+                return defer.promise;
             }
         },
         controller: 'journalizingCtrl'

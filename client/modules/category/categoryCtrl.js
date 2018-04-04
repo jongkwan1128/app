@@ -7,16 +7,6 @@ angular.module('app').controller('categoryCtrl', function ($scope, $http, catego
 
     $scope.backUpData = {};
 
-    let doBackUpData = function (item, index) {
-        $scope.backUpData = angular.copy(item);
-        $scope.backUpData.index = index;
-    };
-    //
-    // let reloadBackUpData = function (item) {
-    //     item.name = $scope.backUpData.name;
-    //     item.description = $scope.backUpData.description;
-    // };
-
     $scope.setEmpty = function () {
         $scope.category.name = null;
         $scope.category.description = null;
@@ -39,10 +29,6 @@ angular.module('app').controller('categoryCtrl', function ($scope, $http, catego
                 $scope.setEmpty();
                 getCategoryList();
             });
-            // $scope.categoryList.push({
-            //     name: $scope.category.name,
-            //     description: $scope.category.description
-            // });
         } else {
             // error popup
         }

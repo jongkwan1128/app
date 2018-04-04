@@ -25,6 +25,7 @@ app.use('/logout', require('./server/api/logout/logoutController'));
 app.use('/user', require('./server/api/user/userController'));
 
 app.use('/category', require('./server/api/category/categoryController'));
+app.use('/journalizing', require('./server/api/journalizing/journalizingController'));
 // app.use('/account', require('./server/api/account/accountContoller'));
 
 // app.use('/department', require('./server/api/department/departmentController'));
